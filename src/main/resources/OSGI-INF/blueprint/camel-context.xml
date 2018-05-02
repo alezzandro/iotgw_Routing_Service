@@ -22,7 +22,7 @@
         <bindy type="Csv" classType="com.redhat.demo.iotdemo.routingService.Dataset" id="bindyDataFormat"/>
       </dataFormats>
       <route id="messagesFromSensor">
-        <from uri="mqtt:mqtt.temp.receiver?host=tcp://localhost:1883&amp;subscribeTopicNames=iotdemo/#/#&amp;userName=admin&amp;password=change12_me"/>
+        <from uri="mqtt:mqtt.temp.receiver?host=tcp://${env:BROKER-AMQ-MQTT}:1883&amp;subscribeTopicNames=iotdemo/#/#&amp;userName=${env:SOURCE_BROKER_ADMIN_UID}&amp;password=${env:SOURCE_BROKER_ADMIN_PASSWD}"/>
         <bean ref="myHelper" method="enhanceMessage" beanType="com.redhat.demo.routingService.MyHelper"/>
         <unmarshal ref="bindyDataFormat"/>
         <convertBodyTo type="java.lang.String"/>
