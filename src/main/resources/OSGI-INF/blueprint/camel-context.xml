@@ -24,9 +24,13 @@
       </dataFormats>
       <route id="messagesFromSensor">
         <from uri="mqtt:mqtt.temp.receiver?host=tcp://{{env:BROKER_AMQ_MQTT_HOST}}:1883&amp;subscribeTopicNames=iotdemo/#/#&amp;userName={{env:SOURCE_BROKER_ADMIN_UID}}&amp;password={{env:SOURCE_BROKER_ADMIN_PASSWD}}"/>
+        <log message="Got from mqtt: [ ${body} ]"/>
         <bean ref="myHelper" method="enhanceMessage" beanType="com.redhat.demo.routingService.MyHelper"/>
+        <log message="Got after helper: [ ${body} ]"/>
         <unmarshal ref="bindyDataFormat"/>
+        <log message="Got after bindy unmarshal: [ ${body} ]"/>
         <marshal ref="jaxbDataFormat"/>
+        <log message="Got after jaxb marshal: [ ${body} ]"/>
         <!-- <convertBodyTo type="java.lang.String"/> -->
         <to uri="activemqGateway:queue:message.to.rules"/>
       </route>
