@@ -68,6 +68,10 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jaxb</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
       <artifactId>camel-mqtt</artifactId>
     </dependency>
     <dependency>
@@ -190,6 +194,7 @@
             <feature>camel-mqtt</feature>
             <feature>activemq-camel</feature>
             <feature>camel-bindy</feature>
+            <feature>camel-jaxb</feature>
             <feature>camel-blueprint</feature>
             <feature>activemq-client</feature>
             <feature>kubernetes-client</feature>

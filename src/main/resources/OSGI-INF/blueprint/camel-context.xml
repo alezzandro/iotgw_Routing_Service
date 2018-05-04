@@ -20,12 +20,14 @@
     <camelContext xmlns="http://camel.apache.org/schema/blueprint">
       <dataFormats>
         <bindy type="Csv" classType="com.redhat.demo.iotdemo.routingService.Dataset" id="bindyDataFormat"/>
+        <jaxb prettyPrint="true" contextPath="com.redhat.demo.iotdemo.routingService" id="jaxbDataFormat"/>
       </dataFormats>
       <route id="messagesFromSensor">
         <from uri="mqtt:mqtt.temp.receiver?host=tcp://{{env:BROKER_AMQ_MQTT_HOST}}:1883&amp;subscribeTopicNames=iotdemo/#/#&amp;userName={{env:SOURCE_BROKER_ADMIN_UID}}&amp;password={{env:SOURCE_BROKER_ADMIN_PASSWD}}"/>
         <bean ref="myHelper" method="enhanceMessage" beanType="com.redhat.demo.routingService.MyHelper"/>
         <unmarshal ref="bindyDataFormat"/>
-        <convertBodyTo type="java.lang.String"/>
+        <marshal ref="jaxbDataFormat"/>
+        <!-- <convertBodyTo type="java.lang.String"/> -->
         <to uri="activemqGateway:queue:message.to.rules"/>
       </route>
     </camelContext>
