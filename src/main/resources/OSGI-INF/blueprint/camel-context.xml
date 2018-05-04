@@ -28,10 +28,9 @@
         <bean ref="myHelper" method="enhanceMessage" beanType="com.redhat.demo.routingService.MyHelper"/>
         <log message="Got after helper: [ ${body} ]"/>
         <unmarshal ref="bindyDataFormat"/>
-        <log message="Got after bindy unmarshal: [ ${body} ]"/>
         <marshal ref="jaxbDataFormat"/>
-        <log message="Got after jaxb marshal: [ ${body} ]"/>
-        <!-- <convertBodyTo type="java.lang.String"/> -->
+        <log message="Got after marshal: [ ${body} ]"/>
+        <convertBodyTo type="java.lang.String"/>
         <to uri="activemqGateway:queue:message.to.rules"/>
       </route>
     </camelContext>
